@@ -29,11 +29,37 @@ document.getElementById("myBtn").addEventListener("click", saveBookmark);
 		//set to Localstorage 
 		localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
 
-	};else {
+	}else {
 		//fetch bookmarks from localstorage JSON parse will turn json into a string 
 		var bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
+		//add bookmark to array 
+		bookmarks.push(bookmark);
+		//re-set back yo localstorgae 
+		localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
 	}
 
    	//prevent form from submitting 
    	e.preventDefault();
    }; 
+
+
+   //fetch bookmarks 
+
+   function fetchBookmarks () {
+   	var bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
+
+
+
+ 	//get out put id 
+ 	var bookmarksResults = document.getElementById("booksmarkResults");
+
+ 	bookmarksResults.innerHTML = ""; 
+
+ 	for(var i = 0; i < bookmarks.length; i++){
+ 		var name = bookmarks[i].name;
+ 		var url = bookmarks[i].url;
+
+ 		bookmarksResults.innerHTML += name;
+ 	}
+
+   }
